@@ -3,8 +3,6 @@ import { Typography,Grid,Input,Button } from '@mui/joy';
 import {auth} from '../firebase/firebaseConfig';
 import { Link } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-
-
 export default function LoginAndLogout() {
   const [name,setName]=useState('')
   const [email,setEmail]=useState('')
