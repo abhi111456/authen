@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { Typography,Grid,Input,Button } from '@mui/joy';
-import { Link } from 'react-router-dom';
+
 import firebase from './firebaseConfig';
-export default function LoginAndLogout() {
-  const [name,setName]=useState('')
+export default function Login() {
+  
   const [email,setEmail]=useState('')
   const [pass,setpass]=useState('')
   
  const submit=async(e)=>{
   e.preventDefault()
   try{
-    const user=await firebase.auth().createUserWithEmailAndPassword(email,pass)
+    const user=await firebase.auth().signInWithEmailAndPassword(email,pass)
     if(user){
-      alert("Account created success")
+      alert("Login success")
+      console.log(user);
     }
   }catch(error){
     alert(error)
@@ -21,7 +22,7 @@ export default function LoginAndLogout() {
  }
   
   return (
-    <form >
+   
    <Grid
     
     container
@@ -37,12 +38,8 @@ export default function LoginAndLogout() {
     <Grid xs={12} sx={{
       textAlign:"center"
     }}>
-    <Typography level="h2"  color="purple">Sign Up</Typography>
+    <Typography level="h2"  color="purple">Sign In</Typography>
     </Grid>
-    <Grid xs={12}>
-      <Input placeholder="Enter your Name"  name='name' value={name} onChange={(e)=>setName(e.target.value)}/>
-      
-   </Grid>
     
  <Grid  xs={12}>
     <Input placeholder="Enter Email"  name='email' value={email} onChange={(e)=>setEmail(e.target.value)}/> 
@@ -56,11 +53,11 @@ export default function LoginAndLogout() {
     <Grid item xs={12} sx={{
       textAlign:"center"
     }}>
-       <Button onClick={submit} >SignUp</Button>
+       <Button onClick={submit} >Login</Button>
     </Grid>
-    <p>Alread have an account:-<Link to="/login">sign in</Link></p>
+    
 </Grid>
-</form>
+
    
   )
 }
