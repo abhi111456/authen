@@ -15,6 +15,9 @@ export default function LoginAndLogout() {
     // Signed up 
     const user = userCredential.user;
     console.log(user);
+    console.log('Name:', name);
+    console.log('Email:', email);
+    console.log('Password:', pass);
     // ...
   })
   .catch((error) => {
@@ -22,6 +25,7 @@ export default function LoginAndLogout() {
     const errorMessage = error.message;
     // ..
   });
+
 
  }
   
