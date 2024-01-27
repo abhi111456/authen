@@ -1,15 +1,17 @@
 import { BrowserRouter } from 'react-router-dom';
-import './App.css';
-
-import Routs from './components/Routs';
-
-
-
+import {Routes,Route} from 'react-router-dom';
+import LoginAndLogout from './components/LoginAndLogout';
+import Login from './components/Login';
 function App() {
   return (
+    <>
    <BrowserRouter>
-    <Routs/>
+     <Routes>
+            <Route path='/' element={<LoginAndLogout/>}></Route>
+            <Route path='/login' element={<Login/>}></Route>
+        </Routes>
    </BrowserRouter>
+   </>
   );
 }
 

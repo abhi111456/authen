@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { Typography,Grid,Input,Button } from '@mui/joy';
+import {auth} from '../firebase/firebaseConfig';
 import { Link } from 'react-router-dom';
-import firebase from './firebaseConfig';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
+
 export default function LoginAndLogout() {
   const [name,setName]=useState('')
   const [email,setEmail]=useState('')
@@ -9,21 +12,25 @@ export default function LoginAndLogout() {
   
  const submit=async(e)=>{
   e.preventDefault()
-  try{
-    const user=await firebase.auth().createUserWithEmailAndPassword(email,pass)
-    if(user){
-      alert("Account created success")
-    }
-  }catch(error){
-    alert(error)
-  }
+  await createUserWithEmailAndPassword(auth, email, pass)
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    console.log(user);
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
 
  }
   
   return (
-    <form >
-   <Grid
     
+   <Grid
+    component="form"
     container
     spacing={2}
      borderRadius={10}
@@ -60,7 +67,7 @@ export default function LoginAndLogout() {
     </Grid>
     <p>Alread have an account:-<Link to="/login">sign in</Link></p>
 </Grid>
-</form>
+
    
   )
 }

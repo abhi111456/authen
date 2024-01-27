@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Typography,Grid,Input,Button } from '@mui/joy';
-
-import firebase from './firebaseConfig';
+import {auth} from '../firebase/firebaseConfig';
+import { signInWithEmailAndPassword} from "firebase/auth";
 export default function Login() {
   
   const [email,setEmail]=useState('')
@@ -9,22 +9,22 @@ export default function Login() {
   
  const submit=async(e)=>{
   e.preventDefault()
-  try{
-    const user=await firebase.auth().signInWithEmailAndPassword(email,pass)
-    if(user){
-      alert("Login success")
-      console.log(user);
-    }
-  }catch(error){
-    alert(error)
-  }
-
+  await signInWithEmailAndPassword(auth, email, pass)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user);
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
  }
-  
-  return (
+   return (
    
    <Grid
-    
+   component="form"
     container
     spacing={2}
      borderRadius={10}
@@ -56,8 +56,6 @@ export default function Login() {
        <Button onClick={submit} >Login</Button>
     </Grid>
     
-</Grid>
-
-   
+</Grid> 
   )
 }
