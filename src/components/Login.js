@@ -50,7 +50,9 @@ export default function Login() {
    
  </Grid>
 
-    <Grid item xs={12} sx={{
+    <Grid
+     item xs={12} 
+     sx={{
       textAlign:"center"
     }}>
        <Button onClick={submit} >Login</Button>

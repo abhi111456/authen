@@ -67,7 +67,11 @@ export default function LoginAndLogout() {
     }}>
        <Button onClick={submit} >SignUp</Button>
     </Grid>
+    <Grid  xs={12}>
     <p>Alread have an account:-<Link to="/login">sign in</Link></p>
+   
+ </Grid>
+    
 </Grid>
 
    
